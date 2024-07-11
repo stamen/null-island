@@ -33,16 +33,16 @@
 </style>
 <div id="map"></div>
 <br />
-<button id="fly">Zoom</button>
+<button id="fly">Zoom in/out</button>
 <script>
-    const start = 18;
+    const start = 22;
     const end = 4;
     const target = [0, 0];
     const map = new maplibregl.Map({
         container: 'map',
         hash: true,
         style:
-            'https://tiles.stadiamaps.com/styles/stamen_terrain.json',
+            'https://tiles.stadiamaps.com/styles/stamen_terrain_background.json',
         center: target,
         zoom: start
     });
@@ -63,6 +63,57 @@
     map.addControl(new maplibregl.FullscreenControl({container: document.querySelector('body')}));
 
     map.addControl(new maplibregl.NavigationControl());
+
+    map.once("load", () => {
+
+        map.addSource("null-island-nixta", {
+            type: "geojson",
+            data: "data/null-island-nixta.geojson"
+        });
+
+        map.addLayer({
+          id: "null-island-nixta-layer",
+          type: "fill",
+          source: "null-island-nixta",
+          paint: {
+            "fill-color": "#cccccc",
+            "fill-opacity": 1,
+            "fill-outline-color": "black",
+          }
+        });
+
+        map.addSource("null-island-original", {
+            type: "geojson",
+            data: "data/null-island-original.geojson"
+        });
+
+        map.addLayer({
+          id: "null-island-original-layer",
+          type: "fill",
+          source: "null-island-original",
+          paint: {
+            "fill-color": "#dddddd",
+            "fill-opacity": 1,
+            "fill-outline-color": "black",
+          }
+        });
+
+        map.addSource("null-island-natural-earth", {
+            type: "geojson",
+            data: "data/null-island-natural-earth.geojson"
+        });
+
+        map.addLayer({
+          id: "null-island-natural-earth-layer",
+          type: "fill",
+          source: "null-island-natural-earth",
+          paint: {
+            "fill-color": "white",
+            "fill-opacity": 1,
+            "fill-outline-color": "black",
+          }
+        });
+    });
 
     let isAtStart = true;
 
