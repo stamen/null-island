@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Slowly fly to a location</title>
+    <title>Null Island(s)</title>
     <meta property="og:description" content="Use flyTo with flyOptions to slowly zoom to a location." />
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,24 +33,43 @@
 </style>
 <div id="map"></div>
 <br />
-<button id="fly">Fly</button>
+<button id="fly">Zoom</button>
 <script>
-    const start = [-74.5, 40];
-    const end = [74.5, 40];
+    const start = 18;
+    const end = 14;
+    const target = [0, 0];
     const map = new maplibregl.Map({
         container: 'map',
+        hash: true,
         style:
-            'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
-        center: start,
-        zoom: 9
+            'https://tiles.stadiamaps.com/styles/stamen_terrain.json',
+        center: target,
+        zoom: start
     });
+
+    let scale = new maplibregl.ScaleControl({
+        maxWidth: 200,
+        unit: 'metric'
+    });
+    map.addControl(scale);
+
+    let scale2 = new maplibregl.ScaleControl({
+        maxWidth: 200,
+        unit: 'imperial'
+    });
+    map.addControl(scale2);
+
+
+    map.addControl(new maplibregl.FullscreenControl({container: document.querySelector('body')}));
+
+    map.addControl(new maplibregl.NavigationControl());
 
     let isAtStart = true;
 
     document.getElementById('fly').addEventListener('click', () => {
         // depending on whether we're currently at point a or b, aim for
         // point a or b
-        const target = isAtStart ? end : start;
+        const targetZoom = isAtStart ? end : start;
 
         // and now we're at the opposite point
         isAtStart = !isAtStart;
@@ -59,13 +78,13 @@
             // These options control the ending camera position: centered at
             // the target, at zoom level 9, and north up.
             center: target,
-            zoom: 9,
+            zoom: targetZoom,
             bearing: 0,
 
             // These options control the flight curve, making it move
             // slowly and zoom out almost completely before starting
             // to pan.
-            speed: 0.2, // make the flying slow
+            speed: 1, // make the flying slow
             curve: 1, // change the speed at which it zooms out
 
             // This can be any easing function: it takes a number between
