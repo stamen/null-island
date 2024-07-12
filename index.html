@@ -36,7 +36,7 @@
 <button id="fly">Zoom in/out</button>
 <script>
     const start = 22;
-    const end = 3;
+    const end = 2;
     const target = [0, 0];
     const map = new maplibregl.Map({
         container: 'map',
@@ -66,6 +66,66 @@
 
     map.once("load", () => {
 
+        map.addSource("null-island-nixta-label-point", {
+            type: "geojson",
+            data: {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [0, -0.05]
+                        },
+                        'properties': {
+                            'name':
+                            "Null Island\nnixta's version\ncirca 2014",
+                        }
+                    }
+                ]
+            }
+        });
+
+        map.addSource("null-island-original-label-point", {
+            type: "geojson",
+            data: {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [0, -0.0004]
+                        },
+                        'properties': {
+                            'name':
+                            "Null Island\noriginal version\ncirca 2010",
+                        }
+                    }
+                ]
+            }
+        });
+
+        map.addSource("null-island-natural-earth-label-point", {
+            type: "geojson",
+            data: {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [0, -0.00001]
+                        },
+                        'properties': {
+                            'name':
+                            "Null Island\nNatural Earth version\ncirca 2011",
+                        }
+                    }
+                ]
+            }
+        });
+
         map.addSource("null-island-nixta", {
             type: "geojson",
             data: "data/null-island-nixta.geojson"
@@ -80,6 +140,37 @@
             "fill-opacity": 1,
             "fill-outline-color": "black",
           }
+        });
+
+        map.addLayer({
+            id: "null-island-nixta-label",
+            type: "symbol",
+            source: "null-island-nixta-label-point",
+            minzoom: 9,
+            maxzoom: 13,
+            layout: {
+                "symbol-placement": "point",
+                "text-font": ["Inter Regular"],
+                "text-field": ['get', 'name'],
+                "text-size": [
+                    'interpolate',
+                    ['exponential', 2],
+                    ['zoom'],
+                    9, 6,
+                    13, 96
+                ]
+            },
+            paint: {
+                "text-opacity": [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    9, 0,
+                    10, 1,
+                    12, 1,
+                    13, 0
+                ]
+            }
         });
 
         map.addSource("null-island-original", {
@@ -98,6 +189,37 @@
           }
         });
 
+        map.addLayer({
+            id: "null-island-original-label",
+            type: "symbol",
+            source: "null-island-original-label-point",
+            minzoom: 16,
+            maxzoom: 20,
+            layout: {
+                "symbol-placement": "point",
+                "text-font": ["Inter Regular"],
+                "text-field": ['get', 'name'],
+                "text-size": [
+                    'interpolate',
+                    ['exponential', 2],
+                    ['zoom'],
+                    16, 6,
+                    20, 96
+                ]
+            },
+            paint: {
+                "text-opacity": [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    16, 0,
+                    17, 1,
+                    19, 1,
+                    20, 0
+                ]
+            }
+        });
+
         map.addSource("null-island-natural-earth", {
             type: "geojson",
             data: "data/null-island-natural-earth.geojson"
@@ -113,6 +235,39 @@
             "fill-outline-color": "black",
           }
         });
+
+        map.addLayer({
+            id: "null-island-natural-earth-label",
+            type: "symbol",
+            source: "null-island-natural-earth-label-point",
+            minzoom: 20,
+            maxzoom: 24,
+            layout: {
+                "symbol-placement": "point",
+                "text-font": ["Inter Regular"],
+                "text-field": ['get', 'name'],
+                "text-size": [
+                    'interpolate',
+                    ['exponential', 2],
+                    ['zoom'],
+                    20, 3,
+                    24, 48
+                ]
+            },
+            paint: {
+                "text-opacity": [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    20, 0,
+                    21, 1,
+                    23, 1,
+                    24, 0
+                ]
+            }
+        });
+
+        map.showCollisionBoxes(true);
     });
 
     let isAtStart = true;
