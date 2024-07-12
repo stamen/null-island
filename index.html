@@ -44,7 +44,7 @@
         style:
             'https://tiles.stadiamaps.com/styles/stamen_terrain_background.json',
         center: target,
-        zoom: start
+        zoom: 18
     });
 
     let scale = new maplibregl.ScaleControl({
@@ -79,7 +79,7 @@
                         },
                         'properties': {
                             'name':
-                            "Null Island\nnixta's version\ncirca 2014",
+                            "Null Island\nnixta's version circa 2014\n63.8 km²",
                         }
                     }
                 ]
@@ -99,7 +99,7 @@
                         },
                         'properties': {
                             'name':
-                            "Null Island\noriginal version\ncirca 2010",
+                            "Null Island\noriginal version circa 2010\n3,433 m²",
                         }
                     }
                 ]
@@ -119,7 +119,7 @@
                         },
                         'properties': {
                             'name':
-                            "Null Island\nNatural Earth version\ncirca 2011",
+                            "Null Island\nNatural Earth version circa 2011\n1 m²",
                         }
                     }
                 ]
@@ -152,6 +152,7 @@
                 "symbol-placement": "point",
                 "text-font": ["Inter Regular"],
                 "text-field": ['get', 'name'],
+                "text-max-width": 100,
                 "text-size": [
                     'interpolate',
                     ['exponential', 2],
@@ -199,6 +200,7 @@
                 "symbol-placement": "point",
                 "text-font": ["Inter Regular"],
                 "text-field": ['get', 'name'],
+                "text-max-width": 100,
                 "text-size": [
                     'interpolate',
                     ['exponential', 2],
@@ -246,6 +248,7 @@
                 "symbol-placement": "point",
                 "text-font": ["Inter Regular"],
                 "text-field": ['get', 'name'],
+                "text-max-width": 100,
                 "text-size": [
                     'interpolate',
                     ['exponential', 2],
