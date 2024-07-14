@@ -87,6 +87,26 @@
             }
         });
 
+        map.addSource("null-island-natural-earth-v4-label-point", {
+            type: "geojson",
+            data: {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [0, -0.008]
+                        },
+                        'properties': {
+                            'name':
+                            "Null Island\nNatural Earth v4.1 circa 2018\n1 km²",
+                        }
+                    }
+                ]
+            }
+        });
+
         map.addSource("null-island-original-label-point", {
             type: "geojson",
             data: {
@@ -107,7 +127,7 @@
             }
         });
 
-        map.addSource("null-island-natural-earth-label-point", {
+        map.addSource("null-island-natural-earth-v1-label-point", {
             type: "geojson",
             data: {
                 'type': 'FeatureCollection',
@@ -120,7 +140,7 @@
                         },
                         'properties': {
                             'name':
-                            "Null Island\nNatural Earth version circa 2011\n1 m²",
+                            "Null Island\nNatural Earth v1.3 circa 2011\n1 m²",
                         }
                     }
                 ]
@@ -148,7 +168,7 @@
             type: "symbol",
             source: "null-island-nixta-label-point",
             minzoom: 9,
-            maxzoom: 13,
+            maxzoom: 12,
             layout: {
                 "symbol-placement": "point",
                 "text-font": ["Inter Regular"],
@@ -169,8 +189,56 @@
                     ['zoom'],
                     9, 0,
                     10, 1,
-                    12, 1,
-                    13, 0
+                    11, 1,
+                    12, 0
+                ]
+            }
+        });
+
+        map.addSource("null-island-natural-earth-v4", {
+            type: "geojson",
+            data: "data/null-island-natural-earth-v4.geojson"
+        });
+
+        map.addLayer({
+          id: "null-island-natural-earth-v4-layer",
+          type: "fill",
+          source: "null-island-natural-earth-v4",
+          paint: {
+            "fill-color": "#dddddd",
+            "fill-opacity": 1,
+            "fill-outline-color": "black",
+          }
+        });
+
+        map.addLayer({
+            id: "null-island-natural-earth-v4-label",
+            type: "symbol",
+            source: "null-island-natural-earth-v4-label-point",
+            minzoom: 12,
+            maxzoom: 16,
+            layout: {
+                "symbol-placement": "point",
+                "text-font": ["Inter Regular"],
+                "text-field": ['get', 'name'],
+                "text-max-width": 100,
+                "text-size": [
+                    'interpolate',
+                    ['exponential', 2],
+                    ['zoom'],
+                    11, 6,
+                    16, 96
+                ]
+            },
+            paint: {
+                "text-opacity": [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    12, 0,
+                    13, 1,
+                    15, 1,
+                    16, 0
                 ]
             }
         });
@@ -185,7 +253,7 @@
           type: "fill",
           source: "null-island-original",
           paint: {
-            "fill-color": "#dddddd",
+            "fill-color": "#eeeeee",
             "fill-opacity": 1,
             "fill-outline-color": "black",
           }
@@ -223,15 +291,15 @@
             }
         });
 
-        map.addSource("null-island-natural-earth", {
+        map.addSource("null-island-natural-earth-v1", {
             type: "geojson",
-            data: "data/null-island-natural-earth.geojson"
+            data: "data/null-island-natural-earth-v1.geojson"
         });
 
         map.addLayer({
-          id: "null-island-natural-earth-layer",
+          id: "null-island-natural-earth-v1-layer",
           type: "fill",
-          source: "null-island-natural-earth",
+          source: "null-island-natural-earth-v1",
           paint: {
             "fill-color": "white",
             "fill-opacity": 1,
@@ -240,9 +308,9 @@
         });
 
         map.addLayer({
-            id: "null-island-natural-earth-label",
+            id: "null-island-natural-earth-v1-label",
             type: "symbol",
-            source: "null-island-natural-earth-label-point",
+            source: "null-island-natural-earth-v1-label-point",
             minzoom: 21,
             layout: {
                 "symbol-placement": "point",
