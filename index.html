@@ -42,7 +42,7 @@
         container: 'map',
         hash: true,
         style:
-            'https://tiles.stadiamaps.com/styles/stamen_terrain_background.json',
+            'https://tiles.stadiamaps.com/styles/stamen_toner.json',
         center: target,
         maxZoom: 23.5,
         zoom: 18
@@ -168,7 +168,7 @@
             type: "symbol",
             source: "null-island-nixta-label-point",
             minzoom: 9,
-            maxzoom: 12,
+            maxzoom: 13,
             layout: {
                 "symbol-placement": "point",
                 "text-font": ["Inter Regular"],
@@ -183,14 +183,15 @@
                 ]
             },
             paint: {
+                "text-color": "white",
                 "text-opacity": [
                     'interpolate',
                     ['linear'],
                     ['zoom'],
                     9, 0,
                     10, 1,
-                    11, 1,
-                    12, 0
+                    12, 1,
+                    13, 0
                 ]
             }
         });
