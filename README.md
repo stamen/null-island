@@ -8,3 +8,5 @@ This repository contains GeoJSON files for four (4) versions of [Null Island](ht
 * A 1-kilometer-square Null Island included in Natural Earth since v4.1 in 2018 ([source](https://github.com/nvkelso/natural-earth-vector/)) 
 
 And also, a [viewer](https://stamen.github.io/null-island) to compare all four.
+
+Read more at [The Many Lives of Null Island](https://stamen.com/the-many-lives-of-null-island/) on the Stamen blog.
